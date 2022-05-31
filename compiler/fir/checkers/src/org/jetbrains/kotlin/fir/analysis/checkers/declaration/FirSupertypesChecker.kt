@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.withSuppressedDiagnostics
 import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirField
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
+import org.jetbrains.kotlin.fir.declarations.utils.isExternal
 import org.jetbrains.kotlin.fir.declarations.utils.modality
 import org.jetbrains.kotlin.fir.declarations.utils.visibility
 import org.jetbrains.kotlin.fir.languageVersionSettings
@@ -87,7 +88,7 @@ object FirSupertypesChecker : FirClassChecker() {
                 val fullyExpandedType = coneType.fullyExpandedType(ctx.session)
                 val symbol = fullyExpandedType.toSymbol(ctx.session)
 
-                checkClassCannotBeExtendedDirectly(symbol, reporter, superTypeRef, ctx)
+                checkClassCannotBeExtendedDirectly(declaration, symbol, reporter, superTypeRef, ctx)
 
                 if (coneType.typeArguments.isNotEmpty()) {
                     checkProjectionInImmediateArgumentToSupertype(coneType, superTypeRef, reporter, ctx)
@@ -119,12 +120,18 @@ object FirSupertypesChecker : FirClassChecker() {
     }
 
     private fun checkClassCannotBeExtendedDirectly(
+        child: FirClass,
         symbol: FirClassifierSymbol<*>?,
         reporter: DiagnosticReporter,
         superTypeRef: FirTypeRef,
         context: CheckerContext
     ) {
-        if (symbol is FirRegularClassSymbol && symbol.classId == StandardClassIds.Enum) {
+        if (
+            symbol is FirRegularClassSymbol &&
+            symbol.classId == StandardClassIds.Enum &&
+            child.classKind != ClassKind.ENUM_CLASS &&
+            !child.isExternal
+        ) {
             reporter.reportOn(superTypeRef.source, FirErrors.CLASS_CANNOT_BE_EXTENDED_DIRECTLY, symbol, context)
         }
     }
