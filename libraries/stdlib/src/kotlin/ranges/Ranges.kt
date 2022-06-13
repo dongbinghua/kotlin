@@ -96,6 +96,40 @@ private class ClosedDoubleRange(
 @SinceKotlin("1.1")
 public operator fun Double.rangeTo(that: Double): ClosedFloatingPointRange<Double> = ClosedDoubleRange(this, that)
 
+/**
+ * A closed range of values of type `Double`.
+ *
+ * Numbers are compared with the ends of this range according to IEEE-754.
+ */
+private class OpenEndDoubleRange(
+    start: Double,
+    endExclusive: Double
+) : OpenEndRange<Double> {
+    private val _start = start
+    private val _endExclusive = endExclusive
+    override val start: Double get() = _start
+    override val endExclusive: Double get() = _endExclusive
+
+    private fun lessThanOrEquals(a: Double, b: Double): Boolean = a <= b
+
+    override fun contains(value: Double): Boolean = value >= _start && value < _endExclusive
+    override fun isEmpty(): Boolean = !(_start < _endExclusive)
+
+    override fun equals(other: Any?): Boolean {
+        return other is OpenEndDoubleRange && (isEmpty() && other.isEmpty() ||
+                _start == other._start && _endExclusive == other._endExclusive)
+    }
+
+    override fun hashCode(): Int {
+        return if (isEmpty()) -1 else 31 * _start.hashCode() + _endExclusive.hashCode()
+    }
+
+    override fun toString(): String = "$_start..<$_endExclusive"
+}
+
+@SinceKotlin("1.7")
+public operator fun Double.rangeUntil(that: Double): OpenEndRange<Double> = OpenEndDoubleRange(this, that)
+
 
 /**
  * A closed range of values of type `Float`.

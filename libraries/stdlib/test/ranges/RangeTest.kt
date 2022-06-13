@@ -221,6 +221,14 @@ public class RangeTest {
         assertFalse(Double.NEGATIVE_INFINITY in halfInfRange)
         assertFalse(Double.NaN in halfInfRange)
         assertTrue(Float.POSITIVE_INFINITY in halfInfRange)
+
+        val openRange = 0.0..<Double.POSITIVE_INFINITY
+        assertTrue(Double.MAX_VALUE in openRange)
+        assertFalse(Double.POSITIVE_INFINITY in openRange)
+        assertFalse(Double.NEGATIVE_INFINITY in openRange)
+        assertFalse(Double.NaN in openRange)
+        assertFalse(Float.POSITIVE_INFINITY in openRange)
+
     }
 
     @Test fun floatRange() {
