@@ -81,6 +81,7 @@ internal abstract class KotlinNativeToolRunner(
             konanHome = project.konanHome,
             konanPropertiesFile = project.file("${project.konanHome}/konan/konan.properties"),
             jvmArgs = project.jvmArgs,
+            // This isn't really compatible with Configuration Cache due to gradle/issues/19474
             isOffline = project.gradle.startParameter.isOffline,
             classpath = project.files(project.kotlinNativeCompilerJar, "${project.konanHome}/konan/lib/trove4j.jar")
         )
