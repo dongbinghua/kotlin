@@ -41,10 +41,7 @@ bool objc_support::internal::ObjectPtrImpl::valid() const noexcept {
 }
 
 void objc_support::internal::ObjectPtrImpl::reset() noexcept {
-    @autoreleasepool {
-        [object_ release];
-        object_ = nil;
-    }
+    reset(nil);
 }
 
 void objc_support::internal::ObjectPtrImpl::reset(NSObject* object) noexcept {
@@ -63,7 +60,7 @@ bool objc_support::internal::ObjectPtrImpl::operator==(const ObjectPtrImpl& rhs)
 }
 
 bool objc_support::internal::ObjectPtrImpl::operator<(const ObjectPtrImpl& rhs) const noexcept {
-    return object_ < rhs.object_;
+    return std::less<>(object_, rhs.object_)();
 }
 
 #endif

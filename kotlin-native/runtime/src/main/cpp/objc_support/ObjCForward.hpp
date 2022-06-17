@@ -12,7 +12,7 @@
 #ifdef __OBJC__
 #define OBJC_FORWARD_DECLARE(clazz) @class clazz
 #else
-#define OBJC_FORWARD_DECLARE(clazz) using clazz = objc_object
+#define OBJC_FORWARD_DECLARE(clazz) class clazz
 #endif
 
 #endif

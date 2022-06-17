@@ -9,10 +9,6 @@
 
 #import <Foundation/NSNotification.h>
 
-#if defined(__has_feature) && __has_feature(objc_arc)
-#error "Assumes that ARC is not used"
-#endif
-
 using namespace kotlin;
 
 @interface Kotlin_objc_support_NSNotificationSubscriptionImpl : NSObject {
