@@ -3,7 +3,7 @@
  * that can be found in the LICENSE file.
  */
 
-#if !(KONAN_IOS || KONAN_TVOS)
+#if !KONAN_HAS_UIKIT_FRAMEWORK
 
 #include "AppStateTracking.hpp"
 

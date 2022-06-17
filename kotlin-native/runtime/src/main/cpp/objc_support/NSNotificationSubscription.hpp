@@ -5,7 +5,7 @@
 
 #pragma once
 
-#if KONAN_MACOSX || KONAN_IOS || KONAN_TVOS || KONAN_WATCHOS
+#if KONAN_HAS_FOUNDATION_FRAMEWORK
 
 #include <functional>
 

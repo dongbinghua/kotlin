@@ -3,12 +3,13 @@
  * that can be found in the LICENSE file.
  */
 
-#if KONAN_MACOSX || KONAN_IOS || KONAN_TVOS || KONAN_WATCHOS
+#if KONAN_HAS_FOUNDATION_FRAMEWORK
 
 #include "ObjectPtr.hpp"
 
 #include <functional>
-#include <objc/NSObject.h>
+
+#import <Foundation/NSObject.h>
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#if KONAN_MACOSX || KONAN_IOS || KONAN_TVOS || KONAN_WATCHOS
+#if KONAN_HAS_FOUNDATION_FRAMEWORK
 
 #if defined(__has_feature) && __has_feature(objc_arc)
 #error "Assumes that ARC is not used"
