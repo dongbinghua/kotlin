@@ -150,6 +150,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) {
         val testSupportTask = project.tasks.getByName(fullTaskName("test_support", target, sanitizer)) as CompileToBitcode
 
         val mimallocEnabled = testedTaskNames.any { it.contains("mimalloc", ignoreCase = true) }
+        val appStateTrackingEnabled = testedTaskNames.any { it.contains("app_state_uikit", ignoreCase = true) }
         val compileTask = project.tasks.create(
                 "${testName}Compile",
                 CompileNativeTest::class.java,
@@ -158,6 +159,7 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) {
                 testSupportTask.outFile,
                 platformManager,
                 mimallocEnabled,
+                appStateTrackingEnabled,
         ).apply {
             val tasksToLink = (compileToBitcodeTasks + testedTasks + testFrameworkTasks)
             this.sanitizer = sanitizer

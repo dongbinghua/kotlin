@@ -123,6 +123,7 @@ abstract class CompileNativeTest @Inject constructor(
         @InputFile val mainFile: File,
         private val platformManager: PlatformManager,
         private val mimallocEnabled: Boolean,
+        private val appStateTrackingEnabled: Boolean,
 ) : DefaultTask() {
 
     @SkipWhenEmpty
@@ -176,6 +177,7 @@ abstract class CompileNativeTest @Inject constructor(
                     outputDsymBundle = outputFile.absolutePath + ".dSYM",
                     needsProfileLibrary = false,
                     mimallocEnabled = mimallocEnabled,
+                    appStateTrackingEnabled = appStateTrackingEnabled,
                     sanitizer = sanitizer
             ).map { it.argsWithExecutable }
         }

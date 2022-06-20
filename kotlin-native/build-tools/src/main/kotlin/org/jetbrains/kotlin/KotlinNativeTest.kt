@@ -577,7 +577,8 @@ open class KonanDynamicTest : KonanStandaloneTest() {
                 kind = LinkerOutputKind.EXECUTABLE,
                 outputDsymBundle = "",
                 needsProfileLibrary = false,
-                mimallocEnabled = false
+                mimallocEnabled = false,
+                appStateTrackingEnabled = false,
         )
         commands.map { cmd ->
             // Filter out linker option that defines __cxa_demangle because Konan_cxa_demangle is not defined in tests.
