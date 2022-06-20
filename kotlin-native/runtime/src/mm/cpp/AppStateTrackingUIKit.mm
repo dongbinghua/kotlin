@@ -9,22 +9,16 @@
 
 #include <functional>
 
-#import <Foundation/NSNotification.h>
+// Workaround from https://youtrack.jetbrains.com/issue/KT-48807#focus=Comments-27-5210791.0-0
+// TODO: remove this once our clang supports NSAttributedString as a valid return from the formatter function.
+#define NS_FORMAT_ARGUMENT(x)
+#import <UIKit/UIApplication.h>
+#undef NS_FORMAT_ARGUMENT
 
 #include "CompilerConstants.hpp"
 #include "objc_support/NSNotificationSubscription.hpp"
 
 using namespace kotlin;
-
-// TODO: Include <UIKit/UIApplication.h> instead when we update clang.
-// Trying to include it currently leads to:
-// In file included from .../System/Library/Frameworks/UIKit.framework/Headers/UIApplication.h:9:
-// In file included from .../System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:12:
-// .../System/Library/Frameworks/Foundation.framework/Headers/NSBundle.h:91:143: error: function does not return NSString
-// - (NSAttributedString *)localizedAttributedStringForKey:(NSString *)key value:(nullable NSString *)value table:(nullable NSString *)tableName NS_FORMAT_ARGUMENT(1) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
-//                                                          ~~~~~~~~~~~~~~                                                                       ^                  ~
-extern "C" NSNotificationName const UIApplicationDidEnterBackgroundNotification;
-extern "C" NSNotificationName const UIApplicationWillEnterForegroundNotification;
 
 class mm::AppStateTracking::Impl : private Pinned {
 public:

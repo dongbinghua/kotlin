@@ -60,7 +60,7 @@ bool objc_support::internal::ObjectPtrImpl::operator==(const ObjectPtrImpl& rhs)
 }
 
 bool objc_support::internal::ObjectPtrImpl::operator<(const ObjectPtrImpl& rhs) const noexcept {
-    return std::less<>(object_, rhs.object_)();
+    return std::less<>()(object_, rhs.object_);
 }
 
 #endif
