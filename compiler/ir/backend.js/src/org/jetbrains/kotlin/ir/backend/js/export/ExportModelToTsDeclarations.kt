@@ -270,7 +270,7 @@ class ExportModelToTsDeclarations {
         }
 
         val renderedTypeParameters = if (typeParameters.isNotEmpty()) {
-            "<" + typeParameters.joinToString(", ") + ">"
+            "<" + typeParameters.joinToString(", ") { it.toTypeScript(indent) } + ">"
         } else {
             ""
         }
