@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.light.classes.symbol
 
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiReferenceList

@@ -388,10 +388,13 @@ internal fun FirLightClassBase.createInheritanceList(forExtendsList: Boolean, su
         // We don't have Enum among enums supertype in sources neither we do for decompiled class-files and light-classes
         if (isEnum && this.classId == StandardClassIds.Enum) return false
 
-        val isInterfaceType =
+        // If FirLightClassBase instance i.e., the inheritor is an interface, it always extends both interface and class
+        if (isInterface) return true
+
+        val isBaseInterface =
             (this.classSymbol as? KtClassOrObjectSymbol)?.classKind == KtClassKind.INTERFACE
 
-        return forExtendsList == !isInterfaceType
+        return forExtendsList == !isBaseInterface
     }
 
     //TODO Add support for kotlin.collections.
