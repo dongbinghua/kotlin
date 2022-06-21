@@ -8,7 +8,6 @@ JvmToolchain.updateJvmTarget(project, "1.6")
 
 def commonSrcDir = "../src"
 def commonTestSrcDir = "../test"
-def commonBuiltinsSrcDir = "$buildDir/src/builtins"
 
 sourceSets {
     main {
@@ -19,7 +18,6 @@ sourceSets {
             if(!BuildPropertiesKt.getKotlinBuildProperties(project).inIdeaSync) {
                 srcDir "$rootDir/core/builtins/src/kotlin/internal"
             }
-            srcDir commonBuiltinsSrcDir
         }
     }
     test {
@@ -35,15 +33,8 @@ dependencies {
     testApi project(":kotlin-test:kotlin-test-annotations-common")
 }
 
-task prepareCommonBuiltins(type: Sync) {
-    from("$rootDir/core/builtins/src/kotlin")
-    include("Range.kt", "Ranges.kt", "Progressions.kt", "ProgressionIterators.kt") //, "Iterators.kt")
-    into(commonBuiltinsSrcDir)
-}
-
 compileKotlinCommon {
     dependsOn(":prepare:build.version:writeStdlibVersion")
-    dependsOn(prepareCommonBuiltins)
 //    dependsOn ":prepare:compiler:prepare-compiler-with-bootstrap-runtime"
 //    compilerJarFile = compilerJarWithBootstrapRuntime
 }
@@ -67,6 +58,7 @@ compileTestKotlinCommon {
                 "-opt-in=kotlin.RequiresOptIn",
                 "-opt-in=kotlin.ExperimentalUnsignedTypes",
                 "-opt-in=kotlin.ExperimentalStdlibApi",
+                "-XXLanguage:+RangeUntilOperator",
         ]
     }
 }

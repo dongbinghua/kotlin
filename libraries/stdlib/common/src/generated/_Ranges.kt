@@ -365,6 +365,36 @@ public operator fun ClosedRange<Float>.contains(value: Byte): Boolean {
 /**
  * Checks if the specified [value] belongs to this range.
  */
+@kotlin.jvm.JvmName("intRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Int>.contains(value: Byte): Boolean {
+    return contains(value.toInt())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("longRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Long>.contains(value: Byte): Boolean {
+    return contains(value.toLong())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("shortRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Short>.contains(value: Byte): Boolean {
+    return contains(value.toShort())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("intRangeContains")
@@ -407,6 +437,16 @@ public operator fun ClosedRange<Short>.contains(value: Double): Boolean {
  */
 @kotlin.jvm.JvmName("floatRangeContains")
 public operator fun ClosedRange<Float>.contains(value: Double): Boolean {
+    return contains(value.toFloat())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("floatRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Float>.contains(value: Double): Boolean {
     return contains(value.toFloat())
 }
 
@@ -458,7 +498,15 @@ public operator fun ClosedRange<Double>.contains(value: Float): Boolean {
     return contains(value.toDouble())
 }
 
-// TODO: for OpenEndRange<Double>
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("doubleRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Double>.contains(value: Float): Boolean {
+    return contains(value.toDouble())
+}
 
 /**
  * Checks if the specified [value] belongs to this range.
@@ -502,6 +550,36 @@ public operator fun ClosedRange<Double>.contains(value: Int): Boolean {
 @kotlin.jvm.JvmName("floatRangeContains")
 public operator fun ClosedRange<Float>.contains(value: Int): Boolean {
     return contains(value.toFloat())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("longRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Long>.contains(value: Int): Boolean {
+    return contains(value.toLong())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("byteRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Byte>.contains(value: Int): Boolean {
+    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("shortRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Short>.contains(value: Int): Boolean {
+    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
@@ -552,6 +630,36 @@ public operator fun ClosedRange<Float>.contains(value: Long): Boolean {
  * Checks if the specified [value] belongs to this range.
  */
 @kotlin.jvm.JvmName("intRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Int>.contains(value: Long): Boolean {
+    return value.toIntExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("byteRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Byte>.contains(value: Long): Boolean {
+    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("shortRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Short>.contains(value: Long): Boolean {
+    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("intRangeContains")
 public operator fun ClosedRange<Int>.contains(value: Short): Boolean {
     return contains(value.toInt())
 }
@@ -590,6 +698,36 @@ public operator fun ClosedRange<Double>.contains(value: Short): Boolean {
 @kotlin.jvm.JvmName("floatRangeContains")
 public operator fun ClosedRange<Float>.contains(value: Short): Boolean {
     return contains(value.toFloat())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("intRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Int>.contains(value: Short): Boolean {
+    return contains(value.toInt())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("longRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Long>.contains(value: Short): Boolean {
+    return contains(value.toLong())
+}
+
+/**
+ * Checks if the specified [value] belongs to this range.
+ */
+@kotlin.jvm.JvmName("byteRangeContains")
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+public operator fun OpenEndRange<Byte>.contains(value: Short): Boolean {
+    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
@@ -760,6 +898,210 @@ public infix fun Byte.downTo(to: Short): IntProgression {
  */
 public infix fun Short.downTo(to: Short): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to.toInt(), -1)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Int.rangeUntil(to: Byte): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Long.rangeUntil(to: Byte): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Byte.rangeUntil(to: Byte): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Short.rangeUntil(to: Byte): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Char.rangeUntil(to: Char): CharRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Int.rangeUntil(to: Int): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Long.rangeUntil(to: Int): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Byte.rangeUntil(to: Int): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Short.rangeUntil(to: Int): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Int.rangeUntil(to: Long): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Long.rangeUntil(to: Long): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Byte.rangeUntil(to: Long): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Short.rangeUntil(to: Long): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Int.rangeUntil(to: Short): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Long.rangeUntil(to: Short): LongRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Byte.rangeUntil(to: Short): IntRange {
+    return until(to)
+}
+
+/**
+ * Returns a range from this value up to but excluding the specified [to] value.
+ * 
+ * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ */
+@SinceKotlin("1.7")
+@ExperimentalStdlibApi
+@kotlin.internal.InlineOnly
+public inline operator fun Short.rangeUntil(to: Short): IntRange {
+    return until(to)
 }
 
 /**

@@ -148,6 +148,30 @@ object RangeOps : TemplateGroupBase() {
         } else {
             body { "return $fromExpr .. (to.to$elementType() - 1$u).to$elementType()" }
         }
+
+    }
+    val f_rangeUntil = fn("rangeUntil(to: Primitive)").byTwoPrimitives {
+        include(Primitives, integralCombinations + unsignedMappings)
+    } builderWith { (fromType, toType) ->
+        operator()
+        inlineOnly()
+        since("1.7")
+        annotation("@ExperimentalStdlibApi")
+        signature("rangeUntil(to: $toType)")
+
+        val elementType = rangeElementType(fromType, toType)
+        val progressionType = elementType.name + "Range"
+        returns(progressionType)
+
+        doc {
+            """
+            Returns a range from this value up to but excluding the specified [to] value.
+
+            If the [to] value is less than or equal to `this` value, then the returned range is empty.
+            """
+        }
+
+        body { "return until(to)" }
     }
 
     val f_contains = fn("contains(value: Primitive)").byTwoPrimitives {
@@ -162,6 +186,28 @@ object RangeOps : TemplateGroupBase() {
             val message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed."
             deprecate(Deprecation(message, warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5"))
         }
+
+        platformName("${rangeType.name.decapitalize()}RangeContains")
+        returns("Boolean")
+        doc { "Checks if the specified [value] belongs to this range." }
+        body {
+            if (shouldCheckForConversionOverflow(fromType = itemType, toType = rangeType))
+                "return value.to${rangeType}ExactOrNull().let { if (it != null) contains(it) else false }"
+            else
+                "return contains(value.to$rangeType())"
+        }
+    }
+
+    val f_containsOpen = fn("contains(value: Primitive)").byTwoPrimitives {
+        include(OpenRanges, numericCombinations)
+        filter { _, (rangeType, itemType) -> rangeType != itemType && rangeType.isIntegral() == itemType.isIntegral()}
+    } builderWith { (rangeType, itemType) ->
+        operator()
+        since("1.7")
+        annotation("@ExperimentalStdlibApi")
+        signature("contains(value: $itemType)")
+
+        check(rangeType.isNumeric() == itemType.isNumeric()) { "Required rangeType and itemType both to be numeric or both not, got: $rangeType, $itemType" }
 
         platformName("${rangeType.name.decapitalize()}RangeContains")
         returns("Boolean")
