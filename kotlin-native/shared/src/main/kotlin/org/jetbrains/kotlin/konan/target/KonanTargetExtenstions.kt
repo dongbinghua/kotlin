@@ -59,6 +59,3 @@ fun KonanTarget.supportedSanitizers(): List<SanitizerKind> =
         // TODO: Support macOS arm64
         else -> listOf()
     }
-
-fun KonanTarget.hasUIKit(): Boolean =
-    this in listOf(KonanTarget.IOS_ARM32, KonanTarget.IOS_ARM64, KonanTarget.IOS_X64, KonanTarget.IOS_SIMULATOR_ARM64, KonanTarget.TVOS_X64, KonanTarget.TVOS_SIMULATOR_ARM64, KonanTarget.TVOS_ARM64)

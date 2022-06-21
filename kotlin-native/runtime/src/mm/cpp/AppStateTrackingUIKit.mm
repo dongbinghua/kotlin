@@ -3,6 +3,8 @@
  * that can be found in the LICENSE file.
  */
 
+#if KONAN_HAS_UIKIT_FRAMEWORK
+
 #include "AppStateTracking.hpp"
 
 #include <functional>
@@ -14,7 +16,6 @@
 #undef NS_FORMAT_ARGUMENT
 
 #include "CompilerConstants.hpp"
-#include "KAssert.h"
 #include "objc_support/NSNotificationSubscription.hpp"
 
 using namespace kotlin;
@@ -33,8 +34,15 @@ private:
 };
 
 mm::AppStateTracking::AppStateTracking() noexcept {
-    RuntimeAssert(compiler::appStateTracking() == compiler::AppStateTracking::kEnabled, "AppStateTracking must be enabled");
-    impl_ = std_support::make_unique<Impl>([this](State state) noexcept { setState(state); });
+    switch (compiler::appStateTracking()) {
+        case compiler::AppStateTracking::kDisabled:
+            break;
+        case compiler::AppStateTracking::kEnabled:
+            impl_ = std_support::make_unique<Impl>([this](State state) noexcept { setState(state); });
+            break;
+    }
 }
 
 mm::AppStateTracking::~AppStateTracking() = default;
+
+#endif

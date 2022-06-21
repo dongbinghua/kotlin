@@ -161,7 +161,6 @@ internal class Linker(val context: Context) {
 
         val needsProfileLibrary = context.coverage.enabled
         val mimallocEnabled = context.config.allocationMode == AllocationMode.MIMALLOC
-        val appStateTrackingEnabled = context.config.appStateTracking == AppStateTracking.ENABLED
 
         val linkerInput = determineLinkerInput(objectFiles, linkerOutput)
         try {
@@ -181,9 +180,7 @@ internal class Linker(val context: Context) {
                     kind = linkerOutput,
                     outputDsymBundle = context.config.outputFiles.symbolicInfoFile,
                     needsProfileLibrary = needsProfileLibrary,
-                    mimallocEnabled = mimallocEnabled,
-                    appStateTrackingEnabled = appStateTrackingEnabled,
-                )
+                    mimallocEnabled = mimallocEnabled)
             (linkerInput.preLinkCommands + finalOutputCommands).forEach {
                 it.logWith(context::log)
                 it.execute()

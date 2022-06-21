@@ -290,21 +290,6 @@ class KonanConfig(val project: Project, val configuration: CompilerConfiguration
                 add("std_alloc.bc")
             }
         }
-        when (appStateTracking) {
-            AppStateTracking.ENABLED -> {
-                when {
-                    target.hasUIKit() -> {
-                        add("app_state_uikit.bc")
-                    }
-                    else -> {
-                        add("app_state_default.bc")
-                    }
-                }
-            }
-            AppStateTracking.DISABLED -> {
-                add("app_state_default.bc")
-            }
-        }
     }.map {
         File(distribution.defaultNatives(target)).child(it).absolutePath
     }

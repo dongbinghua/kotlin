@@ -77,7 +77,6 @@ abstract class LinkerFlags(val configurables: Configurables) {
                                    optimize: Boolean, debug: Boolean,
                                    kind: LinkerOutputKind, outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind? = null): List<Command>
 
     /**
@@ -126,7 +125,6 @@ class AndroidLinker(targetProperties: AndroidConfigurables)
                                    optimize: Boolean, debug: Boolean,
                                    kind: LinkerOutputKind, outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind?): List<Command> {
         require(sanitizer == null) {
             "Sanitizers are unsupported"
@@ -162,7 +160,6 @@ class AndroidLinker(targetProperties: AndroidConfigurables)
             if (dynamic) +"-Wl,-soname,${File(executable).name}"
             +linkerKonanFlags
             if (mimallocEnabled) +mimallocLinkerDependencies
-            if (appStateTrackingEnabled) +appStateTrackingDependencies
             +libraries
             +linkerArgs
         })
@@ -226,7 +223,6 @@ class MacOSBasedLinker(targetProperties: AppleConfigurables)
                                    optimize: Boolean, debug: Boolean, kind: LinkerOutputKind,
                                    outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind?): List<Command> {
         if (kind == LinkerOutputKind.STATIC_LIBRARY) {
             require(sanitizer == null) {
@@ -254,7 +250,6 @@ class MacOSBasedLinker(targetProperties: AppleConfigurables)
             if (dynamic) +linkerDynamicFlags
             +linkerKonanFlags
             if (mimallocEnabled) +mimallocLinkerDependencies
-            if (appStateTrackingEnabled) +appStateTrackingDependencies
             if (compilerRtLibrary != null) +compilerRtLibrary!!
             if (needsProfileLibrary) +profileLibrary!!
             +libraries
@@ -369,7 +364,6 @@ class GccBasedLinker(targetProperties: GccConfigurables)
                                    optimize: Boolean, debug: Boolean,
                                    kind: LinkerOutputKind, outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind?): List<Command> {
         if (kind == LinkerOutputKind.STATIC_LIBRARY) {
             require(sanitizer == null) {
@@ -406,7 +400,6 @@ class GccBasedLinker(targetProperties: GccConfigurables)
             +libraries
             +linkerArgs
             if (mimallocEnabled) +mimallocLinkerDependencies
-            if (appStateTrackingEnabled) +appStateTrackingDependencies
             // See explanation about `-u__llvm_profile_runtime` here:
             // https://github.com/llvm/llvm-project/blob/21e270a479a24738d641e641115bce6af6ed360a/llvm/lib/Transforms/Instrumentation/InstrProfiling.cpp#L930
             if (needsProfileLibrary) +listOf("-u__llvm_profile_runtime", profileLibrary!!)
@@ -463,7 +456,6 @@ class MingwLinker(targetProperties: MingwConfigurables)
                                    optimize: Boolean, debug: Boolean,
                                    kind: LinkerOutputKind, outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind?): List<Command> {
         require(sanitizer == null) {
             "Sanitizers are unsupported"
@@ -498,7 +490,6 @@ class MingwLinker(targetProperties: MingwConfigurables)
             +linkerArgs
             +linkerKonanFlags.filterNot { it in skipDefaultArguments }
             if (mimallocEnabled) +mimallocLinkerDependencies
-            if (appStateTrackingEnabled) +appStateTrackingDependencies
             +additionalArguments
         }
 
@@ -518,7 +509,6 @@ class WasmLinker(targetProperties: WasmConfigurables)
                                    optimize: Boolean, debug: Boolean,
                                    kind: LinkerOutputKind, outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind?): List<Command> {
         if (kind != LinkerOutputKind.EXECUTABLE) throw Error("Unsupported linker output kind")
         require(sanitizer == null) {
@@ -575,7 +565,6 @@ open class ZephyrLinker(targetProperties: ZephyrConfigurables)
                                    optimize: Boolean, debug: Boolean,
                                    kind: LinkerOutputKind, outputDsymBundle: String,
                                    needsProfileLibrary: Boolean, mimallocEnabled: Boolean,
-                                   appStateTrackingEnabled: Boolean,
                                    sanitizer: SanitizerKind?): List<Command> {
         if (kind != LinkerOutputKind.EXECUTABLE) throw Error("Unsupported linker output kind: $kind")
         require(sanitizer == null) {

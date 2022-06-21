@@ -420,9 +420,6 @@ fun targetSupportsCoreSymbolication(targetName: String) =
 fun targetSupportsThreads(targetName: String) =
     HostManager().targetByName(targetName).supportsThreads()
 
-fun targetHasUIKit(targetName: String) =
-    HostManager().targetByName(targetName).hasUIKit()
-
 fun Project.mergeManifestsByTargets(source: File, destination: File) {
     logger.info("Merging manifests: $source -> $destination")
 

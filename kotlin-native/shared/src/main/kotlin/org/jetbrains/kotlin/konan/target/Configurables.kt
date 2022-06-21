@@ -68,7 +68,6 @@ interface Configurables : TargetableExternalStorage, RelocationModeFlags {
     val linkerOptimizationFlags get() = targetList("linkerOptimizationFlags")
     val linkerKonanFlags get() = targetList("linkerKonanFlags")
     val mimallocLinkerDependencies get() = targetList("mimallocLinkerDependencies")
-    val appStateTrackingDependencies get() = targetList("appStateTrackingDependencies")
     val linkerNoDebugFlags get() = targetList("linkerNoDebugFlags")
     val linkerDynamicFlags get() = targetList("linkerDynamicFlags")
     val targetSysRoot get() = targetString("targetSysRoot")
