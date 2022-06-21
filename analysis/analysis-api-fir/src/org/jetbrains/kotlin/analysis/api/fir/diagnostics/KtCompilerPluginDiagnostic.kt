@@ -6,8 +6,6 @@
 package org.jetbrains.kotlin.analysis.api.fir.diagnostics
 
 import com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
-import org.jetbrains.kotlin.diagnostics.*
 
 abstract class KtCompilerPluginDiagnostic0 : KtFirDiagnostic<PsiElement>(), KtAbstractFirDiagnostic<PsiElement> {
     final override val diagnosticClass
@@ -15,34 +13,34 @@ abstract class KtCompilerPluginDiagnostic0 : KtFirDiagnostic<PsiElement>(), KtAb
 }
 
 abstract class KtCompilerPluginDiagnostic1 : KtFirDiagnostic<PsiElement>(), KtAbstractFirDiagnostic<PsiElement> {
-    abstract val a: Any?
+    abstract val parameter1: Any?
 
     final override val diagnosticClass
         get() = KtCompilerPluginDiagnostic1::class
 }
 
 abstract class KtCompilerPluginDiagnostic2 : KtFirDiagnostic<PsiElement>(), KtAbstractFirDiagnostic<PsiElement> {
-    abstract val a: Any?
-    abstract val b: Any?
+    abstract val parameter1: Any?
+    abstract val parameter2: Any?
 
     final override val diagnosticClass
         get() = KtCompilerPluginDiagnostic2::class
 }
 
 abstract class KtCompilerPluginDiagnostic3 : KtFirDiagnostic<PsiElement>(), KtAbstractFirDiagnostic<PsiElement> {
-    abstract val a: Any?
-    abstract val b: Any?
-    abstract val c: Any?
+    abstract val parameter1: Any?
+    abstract val parameter2: Any?
+    abstract val parameter3: Any?
 
     final override val diagnosticClass
         get() = KtCompilerPluginDiagnostic3::class
 }
 
 abstract class KtCompilerPluginDiagnostic4 : KtFirDiagnostic<PsiElement>(), KtAbstractFirDiagnostic<PsiElement> {
-    abstract val a: Any?
-    abstract val b: Any?
-    abstract val c: Any?
-    abstract val D: Any?
+    abstract val parameter1: Any?
+    abstract val parameter2: Any?
+    abstract val parameter3: Any?
+    abstract val parameter4: Any?
 
     final override val diagnosticClass
         get() = KtCompilerPluginDiagnostic4::class

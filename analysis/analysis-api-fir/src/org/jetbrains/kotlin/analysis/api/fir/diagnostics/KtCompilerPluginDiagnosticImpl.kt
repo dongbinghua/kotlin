@@ -16,29 +16,29 @@ internal class KtCompilerPluginDiagnostic0Impl(
 internal class KtCompilerPluginDiagnostic1Impl(
     override val firDiagnostic: KtPsiDiagnosticWithParameters1<*>,
     override val token: KtLifetimeToken,
-    override val a: Any?
+    override val parameter1: Any?
 ) : KtCompilerPluginDiagnostic1()
 
 internal class KtCompilerPluginDiagnostic2Impl(
     override val firDiagnostic: KtPsiDiagnosticWithParameters2<*, *>,
     override val token: KtLifetimeToken,
-    override val a: Any?,
-    override val b: Any?
+    override val parameter1: Any?,
+    override val parameter2: Any?
 ) : KtCompilerPluginDiagnostic2()
 
 internal class KtCompilerPluginDiagnostic3Impl(
     override val firDiagnostic: KtPsiDiagnosticWithParameters3<*, *, *>,
     override val token: KtLifetimeToken,
-    override val a: Any?,
-    override val b: Any?,
-    override val c: Any?
+    override val parameter1: Any?,
+    override val parameter2: Any?,
+    override val parameter3: Any?
 ) : KtCompilerPluginDiagnostic3()
 
 internal class KtCompilerPluginDiagnostic4Impl(
     override val firDiagnostic: KtPsiDiagnosticWithParameters4<*, *, *, *>,
     override val token: KtLifetimeToken,
-    override val a: Any?,
-    override val b: Any?,
-    override val c: Any?,
-    override val D: Any?
+    override val parameter1: Any?,
+    override val parameter2: Any?,
+    override val parameter3: Any?,
+    override val parameter4: Any?
 ) : KtCompilerPluginDiagnostic4()
