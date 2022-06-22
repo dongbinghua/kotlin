@@ -370,6 +370,8 @@ internal fun sourcesJarTaskNamed(
     val result = project.registerTask<Jar>(taskName) { sourcesJar ->
         sourcesJar.archiveAppendix.set(artifactNameAppendix)
         sourcesJar.archiveClassifier.set("sources")
+        sourcesJar.isPreserveFileTimestamps = false
+        sourcesJar.isReproducibleFileOrder = true
     }
 
     project.whenEvaluated {
