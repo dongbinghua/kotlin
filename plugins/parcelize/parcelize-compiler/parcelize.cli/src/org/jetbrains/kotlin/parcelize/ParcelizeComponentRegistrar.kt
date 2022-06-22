@@ -14,6 +14,8 @@ import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useInstance
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
+import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
+import org.jetbrains.kotlin.parcelize.fir.FirParcelizeExtensionRegistrar
 import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.jvm.isJvm
 import org.jetbrains.kotlin.resolve.extensions.SyntheticResolveExtension
@@ -26,6 +28,7 @@ class ParcelizeComponentRegistrar : K2PluginRegistrar() {
             SyntheticResolveExtension.registerExtension(ParcelizeResolveExtension())
             ClassBuilderInterceptorExtension.registerExtension(ParcelizeClinitClassBuilderInterceptorExtension())
             StorageComponentContainerContributor.registerExtension(ParcelizeDeclarationCheckerComponentContainerContributor())
+            FirExtensionRegistrarAdapter.registerExtension(FirParcelizeExtensionRegistrar())
         }
     }
 
