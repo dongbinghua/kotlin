@@ -3,6 +3,7 @@ KtSuccessCallInfo:
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
       dispatchReceiver = KtImplicitReceiverValue:
         symbol = KtReceiverParameterSymbol:
+          correspondingSymbol: KtFunctionSymbol(/foo)
           origin: SOURCE
           type: A
         type = A

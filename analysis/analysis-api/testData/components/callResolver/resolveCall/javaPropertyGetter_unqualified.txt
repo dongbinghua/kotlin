@@ -3,6 +3,7 @@ KtSuccessCallInfo:
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
       dispatchReceiver = KtImplicitReceiverValue:
         symbol = KtReceiverParameterSymbol:
+          correspondingSymbol: KtFunctionSymbol(/call)
           origin: SOURCE
           type: JavaClass
         type = JavaClass

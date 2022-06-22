@@ -4,6 +4,7 @@ KtApplicableCallCandidateInfo:
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
       dispatchReceiver = KtImplicitReceiverValue:
         symbol = KtReceiverParameterSymbol:
+          correspondingSymbol: KtAnonymousFunctionSymbol(<local>/<no name provided>)
           origin: SOURCE
           type: test/Target<kotlin/String>
         type = test.Target<Stub (chain inference): TypeVariable(T)>
