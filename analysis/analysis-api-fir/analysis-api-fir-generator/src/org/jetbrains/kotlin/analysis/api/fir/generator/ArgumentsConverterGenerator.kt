@@ -29,6 +29,8 @@ object ArgumentsConverterGenerator {
 
     private fun SmartPrinter.generate(packageName: String, convertersMap: Map<KClass<*>, HLParameterConversion>) {
         printCopyright()
+        println("@file:Suppress(\"UNUSED_PARAMETER\")")
+        println()
         println("package $packageName")
         println()
         collectAndPrintImports(convertersMap)
