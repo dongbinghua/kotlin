@@ -164,7 +164,7 @@ class KonanConfig(val project: Project, val configuration: CompilerConfiguration
             (optimizationsEnabled || CompilerVersion.CURRENT.meta != MetaVersion.RELEASE)
 
     val appStateTracking: AppStateTracking by lazy {
-        configuration.get(BinaryOptions.appStateTracking) ?: AppStateTracking.ENABLED
+        configuration.get(BinaryOptions.appStateTracking) ?: AppStateTracking.DISABLED
     }
 
     init {
