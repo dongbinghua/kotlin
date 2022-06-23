@@ -16,9 +16,15 @@ import kotlin.internal.*
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public class UIntRange(start: UInt, endInclusive: UInt) : UIntProgression(start, endInclusive, 1), ClosedRange<UInt> {
+public class UIntRange(start: UInt, endInclusive: UInt) : UIntProgression(start, endInclusive, 1), ClosedRange<UInt>, OpenEndRange<UInt> {
     override val start: UInt get() = first
     override val endInclusive: UInt get() = last
+    
+    @SinceKotlin("1.7")
+    override val endExclusive: UInt get() {
+        if (last == UInt.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
+        return last + 1u
+    }
 
     override fun contains(value: UInt): Boolean = first <= value && value <= last
 

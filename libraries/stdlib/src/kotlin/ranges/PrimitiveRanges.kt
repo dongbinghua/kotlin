@@ -16,7 +16,7 @@ public class CharRange(start: Char, endInclusive: Char) : CharProgression(start,
     
     @SinceKotlin("1.7")
     override val endExclusive: Char get() {
-        if (last == Char.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE")
+        if (last == Char.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 
@@ -53,7 +53,7 @@ public class IntRange(start: Int, endInclusive: Int) : IntProgression(start, end
     
     @SinceKotlin("1.7")
     override val endExclusive: Int get() {
-        if (last == Int.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE")
+        if (last == Int.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 
@@ -90,7 +90,7 @@ public class LongRange(start: Long, endInclusive: Long) : LongProgression(start,
     
     @SinceKotlin("1.7")
     override val endExclusive: Long get() {
-        if (last == Long.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE")
+        if (last == Long.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1
     }
 

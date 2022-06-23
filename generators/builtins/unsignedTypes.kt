@@ -555,9 +555,15 @@ import kotlin.internal.*
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
-public class ${elementType}Range(start: $elementType, endInclusive: $elementType) : ${elementType}Progression(start, endInclusive, 1), ClosedRange<${elementType}> {
+public class ${elementType}Range(start: $elementType, endInclusive: $elementType) : ${elementType}Progression(start, endInclusive, 1), ClosedRange<${elementType}>, OpenEndRange<${elementType}> {
     override val start: $elementType get() = first
     override val endInclusive: $elementType get() = last
+    
+    @SinceKotlin("1.7")
+    override val endExclusive: $elementType get() {
+        if (last == $elementType.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
+        return last + 1u
+    }
 
     override fun contains(value: $elementType): Boolean = first <= value && value <= last
 
