@@ -53,6 +53,7 @@ compileKotlinCommon {
 }
 
 compileTestKotlinCommon {
+    enabled(false) // until bootstrap
     kotlinOptions {
         freeCompilerArgs += [
                 "-opt-in=kotlin.RequiresOptIn",
