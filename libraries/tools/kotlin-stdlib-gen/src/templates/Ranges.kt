@@ -198,13 +198,37 @@ object RangeOps : TemplateGroupBase() {
         }
     }
 
+//    val f_containsMixed = fn("contains(value: Primitive)").byTwoPrimitives {
+//        include(RangesOfPrimitives, numericCombinations)
+//        filter { _, (rangeType, itemType) -> rangeType in rangePrimitives && rangeType != itemType && rangeType.isIntegral() == itemType.isIntegral()}
+//    } builderWith { (rangeType, itemType) ->
+//        operator()
+//        since("1.7")
+//        annotation("@ExperimentalStdlibApi")
+//        signature("contains(value: $itemType)")
+//
+//        check(rangeType.isNumeric() == itemType.isNumeric()) { "Required rangeType and itemType both to be numeric or both not, got: $rangeType, $itemType" }
+//
+////        platformName("${rangeType.name.decapitalize()}RangeContains")
+//        returns("Boolean")
+//        doc { "Checks if the specified [value] belongs to this range." }
+//        body {
+//            if (shouldCheckForConversionOverflow(fromType = itemType, toType = rangeType))
+//                "return value.to${rangeType}ExactOrNull().let { if (it != null) contains(it) else false }"
+//            else
+//                "return contains(value.to$rangeType())"
+//        }
+//    }
+
+
     val f_containsOpen = fn("contains(value: Primitive)").byTwoPrimitives {
         include(OpenRanges, numericCombinations)
-        filter { _, (rangeType, itemType) -> rangeType != itemType && rangeType.isIntegral() == itemType.isIntegral()}
+        filter { _, (rangeType, itemType) -> rangeType != itemType && rangeType.isIntegral() == itemType.isIntegral() }
     } builderWith { (rangeType, itemType) ->
         operator()
         since("1.7")
         annotation("@ExperimentalStdlibApi")
+        annotation("@kotlin.internal.LowPriorityInOverloadResolution")
         signature("contains(value: $itemType)")
 
         check(rangeType.isNumeric() == itemType.isNumeric()) { "Required rangeType and itemType both to be numeric or both not, got: $rangeType, $itemType" }
@@ -272,7 +296,10 @@ object RangeOps : TemplateGroupBase() {
         val conversion = if (isConversionDeprecated) "toInt().to$toType" else "to$toType"
 
         body {
-            "return if (this in $toType.MIN_VALUE.to$fromType()..$toType.MAX_VALUE.to$fromType()) this.$conversion() else null"
+//            @OptIn(ExperimentalStdlibApi::class)
+            """
+            return if (this in $toType.MIN_VALUE.to$fromType()..$toType.MAX_VALUE.to$fromType()) this.$conversion() else null
+            """
         }
     }
 }
