@@ -26303,6 +26303,12 @@ public class IrJsCodegenBoxTestGenerated extends AbstractIrJsCodegenBoxTest {
             }
 
             @Test
+            @TestMetadata("openRangeUntil.kt")
+            public void testOpenRangeUntil() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/expression/openRangeUntil.kt");
+            }
+
+            @Test
             @TestMetadata("overflowZeroDownToMaxValue.kt")
             public void testOverflowZeroDownToMaxValue() throws Exception {
                 runTest("compiler/testData/codegen/box/ranges/expression/overflowZeroDownToMaxValue.kt");
@@ -27122,6 +27128,12 @@ public class IrJsCodegenBoxTestGenerated extends AbstractIrJsCodegenBoxTest {
             @TestMetadata("openRange.kt")
             public void testOpenRange() throws Exception {
                 runTest("compiler/testData/codegen/box/ranges/literal/openRange.kt");
+            }
+
+            @Test
+            @TestMetadata("openRangeUntil.kt")
+            public void testOpenRangeUntil() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/literal/openRangeUntil.kt");
             }
 
             @Test
@@ -29986,6 +29998,12 @@ public class IrJsCodegenBoxTestGenerated extends AbstractIrJsCodegenBoxTest {
                 }
 
                 @Test
+                @TestMetadata("openRangeUntil.kt")
+                public void testOpenRangeUntil() throws Exception {
+                    runTest("compiler/testData/codegen/box/ranges/unsigned/expression/openRangeUntil.kt");
+                }
+
+                @Test
                 @TestMetadata("overflowZeroDownToMaxValue.kt")
                 public void testOverflowZeroDownToMaxValue() throws Exception {
                     runTest("compiler/testData/codegen/box/ranges/unsigned/expression/overflowZeroDownToMaxValue.kt");
@@ -30173,6 +30191,12 @@ public class IrJsCodegenBoxTestGenerated extends AbstractIrJsCodegenBoxTest {
                 @TestMetadata("openRange.kt")
                 public void testOpenRange() throws Exception {
                     runTest("compiler/testData/codegen/box/ranges/unsigned/literal/openRange.kt");
+                }
+
+                @Test
+                @TestMetadata("openRangeUntil.kt")
+                public void testOpenRangeUntil() throws Exception {
+                    runTest("compiler/testData/codegen/box/ranges/unsigned/literal/openRangeUntil.kt");
                 }
 
                 @Test
