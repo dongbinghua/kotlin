@@ -65,7 +65,7 @@ class ExportModelGenerator(val context: JsIrBackendContext, val generateNamespac
     }
 
     private fun exportClass(candidate: IrClass): ExportedDeclaration? {
-        val superTypes = candidate.symbol.collectSuperTransitiveHierarchy() + candidate.superTypes
+        val superTypes = candidate.defaultType.collectSuperTransitiveHierarchy() + candidate.superTypes
 
         return if (candidate.isEnumClass) {
             exportEnumClass(candidate, superTypes)
@@ -470,7 +470,7 @@ class ExportModelGenerator(val context: JsIrBackendContext, val generateNamespac
         }
     }
 
-    private fun IrClassSymbol.collectSuperTransitiveHierarchy(): Set<IrType> =
+    private fun IrSimpleType.collectSuperTransitiveHierarchy(): Set<IrType> =
         transitiveExportCollector.collectSuperTransitiveHierarchyFor(this)
 
     private fun exportAsEnumMember(
@@ -598,7 +598,7 @@ class ExportModelGenerator(val context: JsIrBackendContext, val generateNamespac
                 val name = klass.getFqNameWithJsNameWhenAvailable(!isNonExportedExternal && generateNamespacesForPackages).asString()
 
                 val exportedSupertype = runIf(shouldCalculateExportedSupertypeForImplicit && isImplicitlyExported) {
-                    val transitiveExportedType = classifier.collectSuperTransitiveHierarchy()
+                    val transitiveExportedType = nonNullType.collectSuperTransitiveHierarchy()
                     if (transitiveExportedType.isEmpty()) return@runIf null
                     transitiveExportedType.map(::exportType).reduce(ExportedType::IntersectionType)
                 } ?: ExportedType.Primitive.Any
