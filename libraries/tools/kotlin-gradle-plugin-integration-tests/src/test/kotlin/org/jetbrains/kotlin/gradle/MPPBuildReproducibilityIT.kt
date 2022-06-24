@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 /* Only supported on platforms that support the 'diff' util */
 @OsCondition(supportedOn = [OS.LINUX, OS.MAC])
 @MppGradlePluginTests
-@DisplayName("Hierarchical multiplatform")
+@DisplayName("Multiplatform Build Reproducibility")
 class MPPBuildReproducibilityIT : KGPBaseTest() {
 
     @GradleTest
