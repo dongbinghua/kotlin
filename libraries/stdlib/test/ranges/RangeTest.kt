@@ -295,8 +295,6 @@ public class RangeTest {
         assertFalse(Float.POSITIVE_INFINITY in openRange)
         assertFalse(Float.NEGATIVE_INFINITY in openRange)
         assertFalse(Float.NaN in openRange)
-        assertFalse(Double.POSITIVE_INFINITY in openRange)
-//        assertFalse(Double.MAX_VALUE in openRange) // what's greater Double.MAX_VALUE or Float.POSITIVE_INFINITY?
     }
 
     @Suppress("EmptyRange")
